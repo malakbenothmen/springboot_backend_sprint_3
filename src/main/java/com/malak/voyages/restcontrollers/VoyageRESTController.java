@@ -36,7 +36,7 @@ public class VoyageRESTController {
 
 	@RequestMapping(value="/addvoy",method = RequestMethod.POST)
 	//@PostMapping("/addvoy")
-	@PreAuthorize("hasAuthority('ADMIN')")
+	//@PreAuthorize("hasAuthority('ADMIN')")
 	public Voyage createVoyage(@RequestBody Voyage voyage) {
 	return voyageService.saveVoyage(voyage);
 	}

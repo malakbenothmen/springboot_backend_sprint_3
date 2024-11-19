@@ -1,6 +1,7 @@
 package com.malak.voyages.service;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,13 +11,18 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.malak.voyages.entities.Image;
+import com.malak.voyages.entities.Voyage;
 import com.malak.voyages.repos.ImageRepository;
+import com.malak.voyages.repos.VoyageRepository;
 
 @Service 
 public class ImageServiceImpl implements ImageService{ 
  
     @Autowired 
     ImageRepository imageRepository; 
+    
+    @Autowired
+    VoyageRepository voyageRepository;
     
     @Autowired 
     VoyageService voyagetService; 
@@ -59,5 +65,25 @@ public class ImageServiceImpl implements ImageService{
     public void deleteImage(Long id) { 
         imageRepository.deleteById(id); 
     } 
+    
+    
+    @Override 
+    public Image uplaodImageVoy(MultipartFile file,Long idVoy)  
+   throws IOException { 
+     Voyage v = new Voyage(); 
+     v.setIdVoyage(idVoy); 
+     return imageRepository.save(Image.builder() 
+                   .name(file.getOriginalFilename()) 
+                   .type(file.getContentType()) 
+                   .image(file.getBytes()) 
+                   .voyage(v).build() ); 
+    } 
+    
+    
+    @Override 
+	 public List<Image> getImagesParVoy(Long voyId) { 
+	  Voyage v = voyageRepository.findById(voyId).get(); 
+	  return v.getImages(); 
+	 }   
  
 }

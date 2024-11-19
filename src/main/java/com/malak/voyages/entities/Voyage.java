@@ -1,13 +1,14 @@
 package com.malak.voyages.entities;
 
 import java.time.LocalDate;
-
+import java.util.List;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 
 
@@ -29,8 +30,11 @@ public class Voyage {
     private Type type ;
     
     
-    @OneToOne 
+   /* @OneToOne 
     private Image image; 
+    */
+    @OneToMany (mappedBy = "voyage") 
+    private List<Image> images; 
     
     
 	public Type getType() {
@@ -165,6 +169,21 @@ public class Voyage {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+	
+	
+	
+
+
+
+
+	public List<Image> getImages() {
+		return images;
+	}
+
+
+	public void setImages(List<Image> images) {
+		this.images = images;
 	}
 
 

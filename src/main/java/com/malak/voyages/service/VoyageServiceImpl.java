@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.malak.voyages.entities.Type;
 import com.malak.voyages.entities.Voyage;
+import com.malak.voyages.repos.ImageRepository;
 import com.malak.voyages.repos.VoyageRepository;
 
 @Service
@@ -14,17 +15,32 @@ public class VoyageServiceImpl implements VoyageService{
 	
 	@Autowired
 	private VoyageRepository voyageRepository;
+	
+	@Autowired
+	private ImageRepository imageRepository ;
 
 	@Override
 	public Voyage saveVoyage(Voyage v) {		
 		return voyageRepository.save(v);
 	}
 
-	@Override
+	/*@Override
 	public Voyage updateVoyage(Voyage v) {
 		return voyageRepository.save(v);
 	
-	}
+	}*/
+	@Override 
+	 public Voyage updateVoyage(Voyage v) { 
+	 // Long oldVoyImageId = this.getVoyage(v.getIdVoyage()).getImage().getIdImage(); 
+	//  Long newVoyImageId =v.getImage().getIdImage(); 
+	   
+	  Voyage voyUpdated = voyageRepository.save(v); 
+	   
+	//  if (oldVoyImageId != newVoyImageId) //si l'image a été modifiée 
+	//   imageRepository.deleteById(oldVoyImageId); 
+	   
+	  return voyUpdated; 
+	 } 
 
 	@Override
 	public void deleteVoyage(Voyage v) {

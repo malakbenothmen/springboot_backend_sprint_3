@@ -45,16 +45,16 @@ public class SecurityConfig {
 	          }))
 	  .authorizeHttpRequests( requests -> requests
 	  .anyRequest().permitAll());
-	 /* .requestMatchers("/api/all/**").hasAnyAuthority("ADMIN","USER") 
+	  /*.requestMatchers("/api/all/**").hasAnyAuthority("ADMIN","USER") 
 	  .requestMatchers(HttpMethod.GET,"/api/getbyid/**").hasAnyAuthority("ADMIN","USER") 
-	  //.requestMatchers(HttpMethod.POST,"/api/addvoy/**").hasAnyAuthority("ADMIN") 
+	  .requestMatchers(HttpMethod.POST,"/api/addvoy/**").hasAnyAuthority("ADMIN") 
 	  .requestMatchers(HttpMethod.PUT,"/api/updatevoy/**").hasAuthority("ADMIN") 
 	  .requestMatchers(HttpMethod.DELETE,"/api/delvoy/**").hasAuthority("ADMIN")
 			  .anyRequest().authenticated() )
 	  
 	  .addFilterBefore(new JWTAuthorizationFilter(), 
-		        UsernamePasswordAuthenticationFilter.class); 
-	   */
+		        UsernamePasswordAuthenticationFilter.class); */
+	   
 	 return http.build(); 
  } 
 }

@@ -6,7 +6,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile; 
 import com.malak.voyages.entities.Image; 
 import com.malak.voyages.service.ImageService; 
-import java.io.IOException; 
+import java.io.IOException;
+import java.util.List; 
  
 @RestController 
 @RequestMapping("/api/image") 
@@ -21,6 +22,21 @@ public class ImageRestController {
     public Image uploadImage(@RequestParam("image")MultipartFile file) throws IOException { 
         return imageService.uplaodImage(file); 
     } 
+    
+    @PostMapping(value = "/uplaodImageVoy/{idVoy}" ) 
+    public Image uploadMultiImages(@RequestParam("image")MultipartFile file, 
+    		@PathVariable("idVoy") Long idVoy) throws IOException { 
+    	return imageService.uplaodImageVoy(file,idVoy); 
+    } 
+
+    @RequestMapping(value = "/getImagesVoy/{idVoy}" , method = RequestMethod.GET) 
+    public List<Image> getImagesVoy(@PathVariable("idVoy") Long idVoy) 
+    		throws IOException { 
+    	return imageService.getImagesParVoy(idVoy); 
+    } 
+    
+    
+    
     @RequestMapping(value = "/get/info/{id}" , method = RequestMethod.GET) 
     public Image getImageDetails(@PathVariable("id") Long id) throws IOException { 
         return imageService.getImageDetails(id) ; 
